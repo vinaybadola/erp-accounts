@@ -3,6 +3,9 @@ export const buildListParams = (filters) => {
   params.set('page', String(filters.page));
   params.set('limit', String(filters.limit));
 
+  if (filters.days !== undefined && filters.days !== null) {
+    params.set('days', String(filters.days));
+  }
   if (filters.search) params.set('search', filters.search);
   if (filters.stateCode) params.set('stateCode', filters.stateCode);
   if (filters.entityId) params.set('entityId', filters.entityId);
