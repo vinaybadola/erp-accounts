@@ -41,6 +41,7 @@ export const CUSTOMER_API = {
     },
     report: {
       sell: '/billing/sale/report/sell',
+      lastNDaysPayment: '/billing/sale/report/last-n-days-payment',
       outstanding: '/billing/sale/report/outstanding/',
       receipt: '/billing/sale/report/receipt/',
       collectionReport : '/billing/sale/report/collection',

@@ -23,7 +23,7 @@ const SkeletonTable = () => (
 );
 
 // ─── OutstandingList ──────────────────────────────────────────────────────────
-// Sirf teen kaam: loading / error / table — pagination yahan nahi
+
 const OutstandingList = ({
   data,
   loading,

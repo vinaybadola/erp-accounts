@@ -8,7 +8,9 @@ import {
   getCurrentMonth,
 } from '../../constants';
 
-export const useFilters = () => {
+const EMPTY_INITIAL_FILTERS = Object.freeze({});
+
+export const useFilters = (initialFilters = EMPTY_INITIAL_FILTERS) => {
   const searchParams = useSearchParams();
 
   const [filters, setFilters] = useState(() => {
@@ -16,9 +18,11 @@ export const useFilters = () => {
       const val = searchParams.get(key);
       return val !== null ? val : fallback;
     };
-    const defaults = getDefaultFilters();
+    const defaults = { ...getDefaultFilters(), ...initialFilters };
     const urlLimit = parseInt(get('limit', '0'), 10);
     const urlPage  = parseInt(get('page',  '1'), 10);
+    const urlYear = get('year', String(defaults.year));
+    const urlMonth = get('month', String(defaults.month));
 
     return {
       search:         get('search',         defaults.search),
@@ -30,8 +34,8 @@ export const useFilters = () => {
       orderType:      get('orderType',      defaults.orderType),
       productId:      get('productId',      defaults.productId),
       periodType:     get('periodType',     defaults.periodType),
-      year:           parseInt(get('year',  String(defaults.year)),  10) || getCurrentYear(),
-      month:          parseInt(get('month', String(defaults.month)), 10) || getCurrentMonth() + 1,
+      year:           urlYear === 'All' ? 'All' : parseInt(urlYear, 10) || getCurrentYear(),
+      month:          urlMonth === '' ? '' : parseInt(urlMonth, 10) || getCurrentMonth() + 1,
       startDate:      get('startDate',      defaults.startDate),
       endDate:        get('endDate',        defaults.endDate),
       fromMonth:      get('fromMonth',      defaults.fromMonth),
@@ -46,10 +50,10 @@ export const useFilters = () => {
   }, []);
 
   const resetFilters = useCallback(() => {
-    setFilters({ ...getDefaultFilters(), limit: getSavedLimit() });
-  }, []);
+    setFilters({ ...getDefaultFilters(), ...initialFilters, limit: getSavedLimit() });
+  }, [initialFilters]);
 
-  const defaults = getDefaultFilters();
+  const defaults = { ...getDefaultFilters(), ...initialFilters };
   const hasActiveFilters =
     filters.search         !== defaults.search         ||
     filters.stateCode      !== defaults.stateCode      ||

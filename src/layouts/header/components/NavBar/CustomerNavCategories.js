@@ -25,6 +25,13 @@ export const customerNavCategories = [
         action: ["READ"],
       },
       {
+        name: "Last N Days Payment",
+        path: billing.lastNDaysPaymentReport,
+        moduleName: "Sale outstanding",
+        url: billingApi.report.lastNDaysPayment,
+        action: ["READ"],
+      },
+      {
         name: "Outstanding Report",
         path: billing.outstandingReport,
         moduleName: "Sale outstanding",

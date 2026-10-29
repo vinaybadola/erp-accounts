@@ -23,7 +23,6 @@ export const useFetchList = ({ endpoint, filters }) => {
         { credentials: 'include' }
       );
 
-
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
       }

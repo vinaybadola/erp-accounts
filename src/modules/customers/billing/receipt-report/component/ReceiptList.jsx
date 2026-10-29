@@ -25,7 +25,7 @@ const SkeletonTable = () => (
 );
 
 // ─── ReceiptList ──────────────────────────────────────────────────────────────
-// Sirf teen kaam: loading / error / table — pagination yahan nahi
+
 const ReceiptList = ({
   data,
   loading,
